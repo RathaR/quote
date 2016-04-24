@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading form-group">
+    <button type="button" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+    </button>
+    <span ng-bind="$ctrl.rating"></span>
+    <button type="button" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+      <span class="pull-right">
+        <a ui-sref="board.quote({id: $ctrl.id})">#{{$ctrl.id}}</a>
+      </span>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body" ng-bind="$ctrl.text">
+  </div>
+</div>
+
