@@ -5,9 +5,7 @@ angular.module('quoteApp')
       .state('board.quote', {
         url: '/:id',
         params: {
-          id: null,
-          rating: null,
-          text: null
+          id: null
         },
         controller: function($stateParams) {
           this.quoteId = $stateParams.id;

@@ -9,12 +9,17 @@
     }
 
     $onInit() {
-      var id = this.id = this.opts.id;
-      this.quoteService.one(id).then((quote) => {
-        this.text = quote.text;
-        this.rating = quote.rating;
-        this.voted = quote.voted;
+      var id = this.opts.id;
+      this.quoteService.one(id).then(quote => {
+        this._initState(quote);
       })
+    }
+
+    _initState(state) {
+      this.id = state.id;
+      this.text = state.text;
+      this.rating = state.rating;
+      this.voted = state.voted;
     }
 
     vote() {
