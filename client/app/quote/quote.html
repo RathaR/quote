@@ -1,14 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-heading form-group">
-    <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.unVote();" ng-disabled="$ctrl.voted">
+    <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.onRatingDec();" ng-disabled="$ctrl.voted">
       <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
     </button>
     <span ng-bind="$ctrl.rating"></span>
-    <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.vote();" ng-disabled="$ctrl.voted">
+    <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.onRatingInc();" ng-disabled="$ctrl.voted">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </button>
       <span class="pull-right">
-        <a ui-sref="board.quote({id: $ctrl.id})">#{{$ctrl.id}}</a>
+        <a ui-sref="quote({id: $ctrl.id})">#{{$ctrl.id}}</a>
       </span>
     <div class="clearfix"></div>
   </div>

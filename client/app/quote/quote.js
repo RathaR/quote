@@ -2,8 +2,8 @@
 angular.module('quoteApp')
   .config(function($stateProvider) {
     $stateProvider
-      .state('board.quote', {
-        url: '/:id',
+      .state('quote', {
+        url: '/quote/:id',
         params: {
           id: null
         },

@@ -3,35 +3,26 @@
 (function () {
 
   class QuoteService {
+
+    total() {
+      return this._$http.get('/api/quote/total').then((response)=> {
+        return response.data;
+      });
+    }
+
     one(id) {
       return this._$http.get(`/api/quote/${id}`).then(response => {
         return _.first(response.data);
       });
     }
 
-    all() {
-      return this._$http.get('/api/quote').then(response => {
-        return _.pluck(response.data, 'id');
+    all(skip, take, expand) {
+      skip = skip || 0;
+      take = take || 2;
+      expand = !!expand;
+      return this._$http.get('/api/quote', {params: {skip: skip, take: take, expand: expand}}).then((response)=> {
+        return response.data;
       });
-    }
-
-    vote(id) {
-      return this._addRating(id, 1);
-    }
-
-    unVote(id) {
-      return this._addRating(id, -1);
-    }
-
-    _addRating(id, value) {
-      var quote = _.find(this._quotes, {id: id});
-      if(quote) {
-        quote.rating += value;
-        quote.voted = true;
-        return this._$q.when(true);
-      } else {
-        return this._$q.reject(`Quote with id ${id} does not exist!`);
-      }
     }
 
     constructor($http, $q) {

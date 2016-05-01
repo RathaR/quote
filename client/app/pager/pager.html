@@ -1,0 +1,17 @@
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous" ng-click="$ctrl.movePrev()">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="page in $ctrl.pages" ng-class="{active: $ctrl.page === page }" ng-click="$ctrl.goToPage(page)">
+      <a href="#">{{page}}</a>
+    </li>
+    <li>
+      <a href="#" aria-label="Next" ng-click="$ctrl.moveNext()">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

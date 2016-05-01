@@ -61,7 +61,11 @@ function handleError(res, statusCode) {
 
 // Gets a list of Quotes
 export function index(req, res) {
-  return Quote.find().exec()
+  var skip = +req.query.skip || 0;
+  var take = +req.query.take || 2;
+  var expand = req.query.expand;
+  var cursor = expand === 'true' ? Quote.find() : Quote.find({}, {id: true});
+  return cursor.skip(skip).limit(take).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -74,6 +78,11 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+export function total(req, res) {
+  return Quote.find().count().exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
 //// Creates a new Quote in the DB
 //export function create(req, res) {
 //  return Quote.create(req.body)

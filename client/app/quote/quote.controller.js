@@ -4,15 +4,14 @@
 
   class QuoteController {
 
-    constructor(QuoteService) {
-      this.quoteService = QuoteService;
+    constructor(QuoteService, RatingService) {
+      this.quote = QuoteService;
+      this.ratingService = RatingService;
     }
 
     $onInit() {
       var id = this.opts.id;
-      this.quoteService.one(id).then(quote => {
-        this._initState(quote);
-      })
+      this.quote.one(id).then(this._initState.bind(this))
     }
 
     _initState(state) {
@@ -22,27 +21,34 @@
       this.voted = state.voted;
     }
 
-    vote() {
-      if (this.voted) {
+    checkVoted() {
+      return this.voted;
+    }
+
+    setVoted() {
+      this.voted = true;
+    }
+
+    onRatingInc() {
+      if (this.checkVoted()) {
         return;
       }
-      var id = this.id;
-      this.quoteService.vote(id).then(()=> {
-        this.voted = true;
+      this.ratingService.inc(id).then(()=> {
+        this.setVoted();
         this.rating++;
       })
     }
 
-    unVote() {
-      if (this.voted) {
+    onRatingDec() {
+      if (this.checkVoted()) {
         return;
       }
-      var id = this.id;
-      this.quoteService.unVote(id).then(()=> {
-        this.voted = true;
+      this.ratingService.dec(id).then(()=> {
+        this.setVoted();
         this.rating--;
       })
     }
+
   }
 
   angular.module('quoteApp')
